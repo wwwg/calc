@@ -70,11 +70,15 @@ namespace ast {
 	};
 	class AST {
 	public:
-		string raw;
 		Block* base;
-		AST(string init) {
-			raw = init;
+		AST() {
 			base = new Block();
+		}
+		~AST() {
+			if (base != nullptr) {
+				delete base;
+				base = nullptr;
+			}
 		}
 	};
 };
