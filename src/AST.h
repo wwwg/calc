@@ -24,15 +24,17 @@ using namespace std;
 */
 namespace ast {
 	enum ExpressionId {
-		Constant,
-		Group,
-		Operator,
-		None = 0
+		ConstantId,
+		GroupId,
+		OperatorId,
+		NoneId = 0
 	};
 	class Expression {
 	public:
 		ExpressionId id;
-		Expression() { }
+		Expression() {
+			id = NoneId;
+		}
 		Expression(ExpressionId _id) {
 			id = _id;
 		}
@@ -55,18 +57,18 @@ namespace ast {
 	  };
 	  SpecificExpression() : Expression(eid) {}
 	};
-	class Constant : SpecificExpression<ExpressionId::Constant> {
+	class Constant : SpecificExpression<ExpressionId::ConstantId> {
 	public:
 		double value;
 		Constant() { }
 	};
-	class Operator : SpecificExpression<ExpressionId::Operator> {
+	class Operator : SpecificExpression<ExpressionId::OperatorId> {
 	public:
 		Expression left;
 		Expression right;
 		Operator() { }
 	};
-	class Block : SpecificExpression<ExpressionId::Group> {
+	class Block : SpecificExpression<ExpressionId::GroupId> {
 	public:
 		ExpressionList list;
 		Block() { }
