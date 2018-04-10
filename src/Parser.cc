@@ -16,5 +16,6 @@ string Parser::getError() {
 		return "none";
 }
 ast::Expression* Parser::parseToExpression(int pos) {
-	return new ast::Expression();
+	if (pos > raw.length()) return nullptr;
+	return nullptr;
 }
