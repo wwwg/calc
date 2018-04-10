@@ -1,6 +1,10 @@
 #pragma once
 #include "AST.h"
 
+struct ParseResult {
+	int pos;
+	ast::Expression* exp;
+};
 class Parser {
 public:
 	ast::AST* tree;
@@ -10,5 +14,6 @@ public:
 	string getError(void);
 protected:
 	string error;
-	ast::Expression* parseToExpression(int);
+	ParseResult parseToExpression(int);
+	ParseResult parseConstant(int);
 };
