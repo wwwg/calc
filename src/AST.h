@@ -22,6 +22,15 @@ namespace ast {
 	enum ExpressionId {
 		Constant,
 		Group,
-		Operator
-	}
+		Operator,
+		None = 0
+	};
+	class Expression {
+	public:
+		ExpressionId id;
+		Expression() { }
+		Expression(ExpressionId _id) {
+			id = _id;
+		}
+	};
 };
