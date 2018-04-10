@@ -32,6 +32,10 @@ namespace ast {
 		Expression(ExpressionId _id) {
 			id = _id;
 		}
+		template<class T>
+		bool is() {
+			return int(id) == int(T::SpecificId);
+		}
 	};
 	template<ExpressionId eid>
 	class SpecificExpression : public Expression {
