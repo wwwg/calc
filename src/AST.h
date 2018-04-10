@@ -33,27 +33,28 @@ namespace ast {
 			id = _id;
 		}
 	};
-	class Constant : Expression {
+	template<ExpressionId eid>
+	class SpecificExpression : public Expression {
+	public:
+	  enum {
+	    SpecificId = eid
+	  };
+	  SpecificExpression() : Expression(eid) {}
+	};
+	class Constant : SpecificExpression<ExpressionId::Constant> {
 	public:
 		double value;
-		Constant() : Expression(ExpressionId::Constant) { }
-		Constant(double _val) : Expression(ExpressionId::Constant) {
-			value = _val;
-		}
+		Constant() { }
 	};
-	class Operator : Expression {
+	class Operator : SpecificExpression<ExpressionId::Operator> {
 	public:
 		Expression left;
 		Expression right;
-		Operator() : Expression(ExpressionId::Constant) { }
-		Operator(Expression l, Expression r) : Expression(ExpressionId::Constant) {
-			left = l;
-			right = r;
-		}
+		Operator() { }
 	};
-	class Block : Expression {
+	class Block : SpecificExpression<ExpressionId::Block> {
 	public:
 		vector<Expression*> list;
-		Block() : Expression(ExpressionId::Block) { }
+		Block() { }
 	};
 };
