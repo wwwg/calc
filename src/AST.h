@@ -21,7 +21,7 @@ using namespace std;
 namespace ast {
 	enum ExpressionId {
 		Constant,
-		Group,
+		Block,
 		Operator,
 		None = 0
 	};
@@ -51,4 +51,9 @@ namespace ast {
 			right = r;
 		}
 	};
+	class Block : Expression {
+	public:
+		vector<Expression*> list;
+		Block() : Expression(ExpressionId::Block) { }
+	}
 };
