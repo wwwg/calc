@@ -14,3 +14,6 @@ string Parser::getError() {
 	else
 		return "none";
 }
+Parser::parseToExpression(int pos) {
+	return new Expression();
+}

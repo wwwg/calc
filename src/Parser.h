@@ -10,4 +10,5 @@ public:
 	string getError(void);
 protected:
 	string error;
+	Expression* parseToExpression(int);
 };
