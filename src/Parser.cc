@@ -29,5 +29,17 @@ ParseResult Parser::parseConstant(int pos) {
 	if (pos > raw.length()) {
 		return r;
 	}
+	int newPos = pos;
+	char c = raw[newPos];
+	string constant;
+	while (utils::isNumber(c)) {
+		constant += c;
+		newPos++;
+		c = raw[newPos];
+	}
+	r.pos = newPos;
+	ast::Constant* ret = new ast::Constant();
+	ret->value = std::stod(constant);
+	r.exp = ret->toExpression();
 	return r;
 }

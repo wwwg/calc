@@ -59,20 +59,23 @@ namespace ast {
 	    SpecificId = eid
 	  };
 	  SpecificExpression() : Expression(eid) {}
+	  Expression* toExpression() {
+	  	return (Expression*)this;
+	  }
 	};
-	class Constant : SpecificExpression<ExpressionId::ConstantId> {
+	class Constant : public SpecificExpression<ExpressionId::ConstantId> {
 	public:
 		double value;
 		Constant() { }
 	};
-	class Operator : SpecificExpression<ExpressionId::OperatorId> {
+	class Operator : public SpecificExpression<ExpressionId::OperatorId> {
 	public:
 		Operation operation;
 		Expression left;
 		Expression right;
 		Operator() { }
 	};
-	class Block : SpecificExpression<ExpressionId::GroupId> {
+	class Block : public SpecificExpression<ExpressionId::GroupId> {
 	public:
 		ExpressionList list;
 		Block() { }
