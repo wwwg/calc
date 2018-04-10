@@ -2,9 +2,12 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 #include <cassert>
+
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 /*
@@ -22,7 +25,7 @@ using namespace std;
 namespace ast {
 	enum ExpressionId {
 		Constant,
-		Block,
+		Group,
 		Operator,
 		None = 0
 	};
@@ -43,6 +46,7 @@ namespace ast {
 			return (T*)this;
 		}
 	};
+	typedef std::vector<Expression*> ExpressionList;
 	template<ExpressionId eid>
 	class SpecificExpression : public Expression {
 	public:
@@ -62,9 +66,18 @@ namespace ast {
 		Expression right;
 		Operator() { }
 	};
-	class Block : SpecificExpression<ExpressionId::Block> {
+	class Block : SpecificExpression<ExpressionId::Group> {
 	public:
-		vector<Expression*> list;
+		ExpressionList list;
 		Block() { }
+	};
+	class AST {
+	public:
+		string raw;
+		Block* base;
+		AST(string init) {
+			raw = init;
+			base = new Block();
+		}
 	};
 };
