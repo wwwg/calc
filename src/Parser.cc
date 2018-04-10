@@ -14,6 +14,6 @@ string Parser::getError() {
 	else
 		return "none";
 }
-Parser::parseToExpression(int pos) {
-	return new Expression();
+ast::Expression* Parser::parseToExpression(int pos) {
+	return new ast::Expression();
 }
