@@ -41,4 +41,14 @@ namespace ast {
 			value = _val;
 		}
 	};
+	class Operator : Expression {
+	public:
+		Expression left;
+		Expression right;
+		Operator() : Expression(ExpressionId::Constant) { }
+		Operator(Expression l, Expression r) : Expression(ExpressionId::Constant) {
+			left = l;
+			right = r;
+		}
+	};
 };
