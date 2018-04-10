@@ -5,6 +5,7 @@ Parser::Parser(string _raw) {
 	tree = nullptr;
 }
 bool Parser::parse() {
+	if (tree == nullptr) return false;
 	return true;
 }
 string Parser::getError() {
