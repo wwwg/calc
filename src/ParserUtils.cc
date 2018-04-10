@@ -1,6 +1,6 @@
 #include "ParserUtils.h"
 
-utils::isNumber(char c) {
+bool utils::isNumber(char c) {
 	if (
 		c == '0' ||
 		c == '1' ||
@@ -12,11 +12,11 @@ utils::isNumber(char c) {
 		c == '7' ||
 		c == '8' ||
 		c == '9' ||
-		c == '.' ||
+		c == '.'
 	) return true;
 	return false;
 }
-utils::isGroupStart(char c) {
+bool utils::isGroupStart(char c) {
 	if (
 		c == '(' ||
 		c == '[' ||
@@ -24,7 +24,7 @@ utils::isGroupStart(char c) {
 	) return true;
 	return false;
 }
-utils::isGroupEnd(char c) {
+bool utils::isGroupEnd(char c) {
 	if (
 		c == ')' ||
 		c == ']' ||
