@@ -37,5 +37,5 @@ namespace ast {
 	public:
 		double value;
 		Constant() : Expression(ExpressionId::Constant) { }
-	}
+	};
 };
