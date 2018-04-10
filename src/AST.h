@@ -55,5 +55,5 @@ namespace ast {
 	public:
 		vector<Expression*> list;
 		Block() : Expression(ExpressionId::Block) { }
-	}
+	};
 };
