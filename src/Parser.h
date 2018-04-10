@@ -3,7 +3,7 @@
 
 class Parser {
 public:
-	AST* tree;
+	ast::AST* tree;
 	string raw;
 	Parser(string);
 };
