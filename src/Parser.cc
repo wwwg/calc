@@ -4,9 +4,13 @@
 Parser::Parser(string _raw) {
 	raw = _raw;
 	tree = nullptr;
+	globalPos = 0;
 }
 bool Parser::parse() {
 	if (tree == nullptr) return false;
+	ParseResult res = parseToExpression(globalPos);
+	globalPos = res.pos;
+	tree->base = res.exp;
 	return true;
 }
 string Parser::getError() {

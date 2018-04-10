@@ -82,15 +82,7 @@ namespace ast {
 	};
 	class AST {
 	public:
-		Block* base;
-		AST() {
-			base = new Block();
-		}
-		~AST() {
-			if (base != nullptr) {
-				delete base;
-				base = nullptr;
-			}
-		}
+		Expression* base;
+		AST() { }
 	};
 };

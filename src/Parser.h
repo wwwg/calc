@@ -9,6 +9,7 @@ class Parser {
 public:
 	ast::AST* tree;
 	string raw;
+	int globalPos;
 	Parser(string);
 	bool parse(void);
 	string getError(void);
