@@ -37,5 +37,8 @@ namespace ast {
 	public:
 		double value;
 		Constant() : Expression(ExpressionId::Constant) { }
+		Constant(double _val) : Expression(ExpressionId::Constant) {
+			value = _val;
+		}
 	};
 };
