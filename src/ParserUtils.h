@@ -8,5 +8,7 @@
 #include <iostream>
 
 namespace utils {
-	//
+	bool isNumber(char);
+	bool isGroupStart(char);
+	bool isGroupEnd(char);
 };
