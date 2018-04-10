@@ -2,6 +2,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <cassert>
 #include <iostream>
 #include <vector>
 
@@ -35,6 +36,11 @@ namespace ast {
 		template<class T>
 		bool is() {
 			return int(id) == int(T::SpecificId);
+		}
+		template<class T>
+		T* cast() {
+			assert(int(id) == int(T::SpecificId));
+			return (T*)this;
 		}
 	};
 	template<ExpressionId eid>
