@@ -6,5 +6,6 @@ int main() {
 	ast::AST tree = ast::AST();
 	Parser p(EXPRESSION);
 	p.tree = &tree;
+	p.parse();
 	return 0;
 }
