@@ -24,6 +24,14 @@ namespace ast {
 		OperatorId,
 		NoneId = 0
 	};
+	enum Operation {
+		Add,
+		Sub,
+		Mul,
+		Div,
+		Pow,
+		Nop = 0
+	};
 	class Expression {
 	public:
 		ExpressionId id;
@@ -59,6 +67,7 @@ namespace ast {
 	};
 	class Operator : SpecificExpression<ExpressionId::OperatorId> {
 	public:
+		Operation operation;
 		Expression left;
 		Expression right;
 		Operator() { }
