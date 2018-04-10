@@ -33,4 +33,9 @@ namespace ast {
 			id = _id;
 		}
 	};
+	class Constant : Expression {
+	public:
+		double value;
+		Constant() : Expression(ExpressionId::Constant) { }
+	}
 };
