@@ -23,9 +23,12 @@ ParseResult Parser::parseToExpression(int pos) {
 	ParseResult r;
 	r.pos = pos;
 	r.exp = nullptr;
-	if (utils::isNumber(raw[pos])) {
+	char c = raw[pos];
+	if (utils::isNumber(c)) {
 		ParseResult res = parseConstant(pos);
 		r = res;
+	} else if (utils::isGroupStart(c)) {
+		// todo : parse groups
 	}
 	return r;
 }
