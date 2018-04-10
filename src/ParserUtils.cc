@@ -33,7 +33,7 @@ bool utils::isGroupEnd(char c) {
 	return false;
 }
 Operator utils::toOp(char c) {
-	Operation ret = ast::Operation::Nop;
+	ast::Operation ret = ast::Operation::Nop;
 	if (c == '+') ret = ast::Operation::Add;
 	if (c == '-') ret = ast::Operation::Sub;
 	if (c == '/') ret = ast::Operation::Div;
