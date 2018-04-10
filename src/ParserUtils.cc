@@ -32,7 +32,7 @@ bool utils::isGroupEnd(char c) {
 	) return true;
 	return false;
 }
-Operator utils::toOp(char c) {
+ast::Operation utils::toOp(char c) {
 	ast::Operation ret = ast::Operation::Nop;
 	if (c == '+') ret = ast::Operation::Add;
 	if (c == '-') ret = ast::Operation::Sub;

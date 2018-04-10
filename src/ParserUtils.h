@@ -13,5 +13,5 @@ namespace utils {
 	bool isNumber(char);
 	bool isGroupStart(char);
 	bool isGroupEnd(char);
-	Operation toOp(char);
+	ast::Operation toOp(char);
 };
