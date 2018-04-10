@@ -1,4 +1,5 @@
 #include "Parser.h"
+#include "ParserUtils.h"
 
 Parser::Parser(string _raw) {
 	raw = _raw;
