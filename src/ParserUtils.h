@@ -7,6 +7,8 @@
 #include <vector>
 #include <iostream>
 
+#include "AST.h"
+
 namespace utils {
 	bool isNumber(char);
 	bool isGroupStart(char);
