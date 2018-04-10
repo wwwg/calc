@@ -19,6 +19,10 @@ ParseResult Parser::parseToExpression(int pos) {
 	ParseResult r;
 	r.pos = pos;
 	r.exp = nullptr;
+	if (utils::isNumber(raw[pos])) {
+		ParseResult res = parseConstant(pos);
+		r = res;
+	}
 	return r;
 }
 ParseResult Parser::parseConstant(int pos) {
