@@ -18,6 +18,6 @@ $(OUT): $(OBJS)
 	$(CC) $(CCOPTS) $< -o $@
 
 clean:
-	rm -f *.o wasmdec
+	rm -f *.o calc
 	rm -f src/*.o
 	rm -f src/**/*.o
