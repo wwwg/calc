@@ -34,9 +34,11 @@ ParseResult Parser::parseToExpression(int pos) {
 		ast::Block* b = new ast::Block();
 		b->last = current;
 		current = b;
+		++pos;
 	} else if (utils::isGroupEnd(c)) {
 		lastCtx = current->last->last;
 		current = current->last;
+		++pos;
 	}
 	return r;
 }
