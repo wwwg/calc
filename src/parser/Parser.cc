@@ -37,7 +37,6 @@ ParseResult Parser::parseToExpression(int pos) {
 			}
 		}
 		last = res.exp;
-		cout << pos << ": " << raw[pos] << endl;
 		return parseToExpression(pos);
 	} else if (utils::isGroupStart(c)) {
 		ast::Block* b = new ast::Block();
@@ -58,21 +57,29 @@ ParseResult Parser::parseToExpression(int pos) {
 		r.pos = pos;
 		cout << "block end" << endl;
 	} else if (utils::isOp(c)) {
+		cout << "operator '" << c << "'" << endl;
 		++pos;
 		ast::Operator* op = new ast::Operator();
 		op->operation = utils::toOp(c);
 		op->left = last;
 		// right needs to be parsed next
+		cout << "parsing right side of operator '" << c << "'" << endl;
+		last = (ast::Expression*)op;
 		ParseResult rightParse = parseToExpression(pos);
+		cout << "done parsing right side of operator '" << c << "'" << endl; 
 		op->right = rightParse.exp;
+		/*
 		// append operator to the current block, if inside one
 		if (current->is<ast::Block>()) {
 			current->cast<ast::Block>()->list.push_back((ast::Expression*)op);
 		}
+		*/
 		// return result
 		r.pos = pos;
 		r.exp = (ast::Expression*)op;
-		cout << "operator '" << c << "'" << endl;
+		last = r.exp;
+	} else {
+		cout << "recieved unknown token: '" << c << "' at pos " << pos << endl;
 	}
 	return r;
 }

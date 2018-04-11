@@ -7,7 +7,7 @@
 #include <vector>
 #include <iostream>
 
-#include "AST.h"
+#include "../AST.h"
 
 using namespace std;
 

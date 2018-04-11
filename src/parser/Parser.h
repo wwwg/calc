@@ -1,5 +1,5 @@
 #pragma once
-#include "AST.h"
+#include "../AST.h"
 
 struct ParseResult {
 	int pos;

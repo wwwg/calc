@@ -7,15 +7,15 @@
 using namespace std;
 /*
 	Abstract syntax tree: hierchy of expressions
-	9 + 3 - 2 + 6 =
+	9 + 3 - 2 =
 
-			ast
-		   /   \
-		  +     6
-		 / \
-		9   -
-		   / \
-		  3   2
+	 ast
+      |
+	  +
+	 / \
+	9   -
+	   / \
+	  3   2
 */
 namespace ast {
 	enum ExpressionId {
