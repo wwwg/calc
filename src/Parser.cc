@@ -47,7 +47,11 @@ ParseResult Parser::parseToExpression(int pos) {
 		// right needs to be parsed next
 		ParseResult rightParse = parseToExpression(pos);
 		op->right = rightParse.exp;
-		// operator parsed; return result
+		// append operator to the current block, if inside one
+		if (current->is<ast::Block>()) {
+			current->cast<ast::Block>()->list.push_back((ast::Expression*)op);
+		}
+		// return result
 		ParseResult ret;
 		ret.pos = pos;
 		ret.exp = (ast::Expression*)op;
