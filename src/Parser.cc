@@ -86,6 +86,6 @@ ParseResult Parser::parseConstant(int pos) {
 	ast::Constant* ret = new ast::Constant();
 	ret->value = std::stod(constant);
 	r.exp = ret->toExpression();
-	cout << "constant '" << ret->value << "'" << endl;
+	cout << "constant " << ret->value << endl;
 	return r;
 }
