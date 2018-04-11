@@ -27,9 +27,18 @@ ParseResult Parser::parseToExpression(int pos) {
 	char c = raw[pos];
 	if (utils::isNumber(c)) {
 		ParseResult res = parseConstant(pos);
-		last = res.exp;
 		pos = res.pos;
-		return parseToExpression(res.pos);
+		if (pos >= raw.length()) {
+			if (last->is<Operator>()) {
+				last->cast<Operator>()->right = res.exp;
+				r.exp = last;
+				r.pos = pos;
+				return r;
+			}
+		}
+		last = res.exp;
+		cout << pos << ": " << raw[pos] << endl;
+		return parseToExpression(pos);
 	} else if (utils::isGroupStart(c)) {
 		ast::Block* b = new ast::Block();
 		b->last = current;
