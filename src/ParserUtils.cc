@@ -41,3 +41,13 @@ ast::Operation utils::toOp(char c) {
 	if (c == '^') ret = ast::Operation::Pow;
 	return ret;
 }
+bool utils::isOp(char c) {
+	if (
+		c == '+' ||
+		c == '-' ||
+		c == '*' ||
+		c == '^' ||
+		c == '/'
+	) return true;
+	return false;
+}
