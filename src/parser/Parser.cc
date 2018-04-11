@@ -41,7 +41,7 @@ ParseResult Parser::parseToExpression(int pos) {
 	} else if (utils::isGroupStart(c)) {
 		ast::Block* b = new ast::Block();
 		++pos;
-		char c2;
+		char c2 = '\0';
 		while (!utils::isGroupEnd(c2)) {
 			// TODO : handle unmatched group ends
 			c2 = raw[pos];
@@ -50,7 +50,7 @@ ParseResult Parser::parseToExpression(int pos) {
 			b->list.push_back(res.exp);
 		}
 		r.pos = pos;
-		r.exp = (Expression*)b;
+		r.exp = (ast::Expression*)b;
 	} else if (utils::isOp(c)) {
 		cout << "operator '" << c << "'" << endl;
 		++pos;
