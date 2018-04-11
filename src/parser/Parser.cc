@@ -50,8 +50,8 @@ ParseResult Parser::parseToExpression(int pos) {
 		r.exp = current;
 		cout << "block start" << endl;
 	} else if (utils::isGroupEnd(c)) {
-		lastCtx = current->last->last;
 		current = current->last;
+		lastCtx = current->last;
 		++pos;
 		r.exp = current;
 		r.pos = pos;
@@ -68,12 +68,6 @@ ParseResult Parser::parseToExpression(int pos) {
 		ParseResult rightParse = parseToExpression(pos);
 		cout << "done parsing right side of operator '" << c << "'" << endl; 
 		op->right = rightParse.exp;
-		/*
-		// append operator to the current block, if inside one
-		if (current->is<ast::Block>()) {
-			current->cast<ast::Block>()->list.push_back((ast::Expression*)op);
-		}
-		*/
 		// return result
 		r.pos = pos;
 		r.exp = (ast::Expression*)op;
