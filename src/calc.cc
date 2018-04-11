@@ -2,7 +2,7 @@
 #include "parser/ParserUtils.h"
 #include "AST.h"
 
-#define EXPRESSION "9+3-2"
+#define EXPRESSION "9+(3-2)"
 
 int main() {
 	ast::AST tree = ast::AST();

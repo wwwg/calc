@@ -18,17 +18,13 @@ bool utils::isNumber(char c) {
 }
 bool utils::isGroupStart(char c) {
 	if (
-		c == '(' ||
-		c == '[' ||
-		c == '{'
+		c == '('
 	) return true;
 	return false;
 }
 bool utils::isGroupEnd(char c) {
 	if (
-		c == ')' ||
-		c == ']' ||
-		c == '}'
+		c == ')'
 	) return true;
 	return false;
 }
