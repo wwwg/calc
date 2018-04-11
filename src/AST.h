@@ -78,6 +78,7 @@ namespace ast {
 	class Block : public SpecificExpression<ExpressionId::GroupId> {
 	public:
 		ExpressionList list;
+		Expression* last;
 		Block() { }
 	};
 	class AST {

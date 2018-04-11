@@ -10,6 +10,7 @@ bool Parser::parse() {
 	if (tree == nullptr) return false;
 	tree->base = new ast::Block();
 	currBlock = tree->base;
+	tree->base->push_back(parseToExpression(globalPos));
 	return true;
 }
 string Parser::getError() {
@@ -27,10 +28,14 @@ ParseResult Parser::parseToExpression(int pos) {
 		ParseResult res = parseConstant(pos);
 		r = res;
 		last = res.exp;
+		parseToExpression(res.pos);
 	} else if (utils::isGroupStart(c)) {
 		ast::Block* b = new ast::Block();
-		lastBlock = currBlock;
+		b->last = currBlock;
 		currBlock = b;
+	} else if (utils::isGroupEnd(c)) {
+		lastBlock = currBlock->last->last;
+		currBlock = currBlock->last;
 	}
 	return r;
 }
