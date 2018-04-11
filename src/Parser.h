@@ -17,5 +17,5 @@ protected:
 	string error;
 	ParseResult parseToExpression(int);
 	ParseResult parseConstant(int);
-	Expression* last;
+	ast::Expression* last;
 };

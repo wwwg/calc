@@ -27,6 +27,7 @@ ParseResult Parser::parseToExpression(int pos) {
 	if (utils::isNumber(c)) {
 		ParseResult res = parseConstant(pos);
 		r = res;
+		last = res.exp;
 	} else if (utils::isGroupStart(c)) {
 		// todo : parse groups
 	}
