@@ -40,6 +40,7 @@ ParseResult Parser::parseToExpression(int pos) {
 		return parseToExpression(pos);
 	} else if (utils::isGroupStart(c)) {
 		ast::Block* b = new ast::Block();
+		cout << "block " << c << endl;
 		++pos;
 		char c2 = '\0';
 		while (!utils::isGroupEnd(c2)) {
@@ -49,6 +50,8 @@ ParseResult Parser::parseToExpression(int pos) {
 			pos = res.pos;
 			b->list.push_back(res.exp);
 		}
+		cout << "end block " << raw[pos] << endl;
+		++pos;
 		r.pos = pos;
 		r.exp = (ast::Expression*)b;
 	} else if (utils::isOp(c)) {
