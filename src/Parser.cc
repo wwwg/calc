@@ -29,8 +29,8 @@ ParseResult Parser::parseToExpression(int pos) {
 		ParseResult res = parseConstant(pos);
 		pos = res.pos;
 		if (pos >= raw.length()) {
-			if (last->is<Operator>()) {
-				last->cast<Operator>()->right = res.exp;
+			if (last->is<ast::Operator>()) {
+				last->cast<ast::Operator>()->right = res.exp;
 				r.exp = last;
 				r.pos = pos;
 				return r;
