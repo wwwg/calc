@@ -39,6 +39,19 @@ ParseResult Parser::parseToExpression(int pos) {
 		lastCtx = current->last->last;
 		current = current->last;
 		++pos;
+	} else if (utils::isOp(c)) {
+		++pos;
+		ast::Operator* op = new ast::Operator();
+		op->operation = utils::toOp(c);
+		op->left = last;
+		// right needs to be parsed next
+		ParseResult rightParse = parseToExpression(pos);
+		op->right = rightParse.exp;
+		// operator parsed; return result
+		ParseResult ret;
+		ret.pos = pos;
+		ret.exp = (ast::Expression*)op;
+		return ret;
 	}
 	return r;
 }

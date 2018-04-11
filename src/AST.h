@@ -72,8 +72,8 @@ namespace ast {
 	class Operator : public SpecificExpression<ExpressionId::OperatorId> {
 	public:
 		Operation operation;
-		Expression left;
-		Expression right;
+		Expression* left;
+		Expression* right;
 		Operator() { }
 	};
 	class Block : public SpecificExpression<ExpressionId::GroupId> {
