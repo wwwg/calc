@@ -33,12 +33,21 @@ ParseResult Parser::parseToExpression(int pos) {
 	} else if (utils::isGroupStart(c)) {
 		ast::Block* b = new ast::Block();
 		b->last = current;
+		if (current->is<ast::Block>()) {
+			current->cast<ast::Block>()->list.push_back((ast::Expression*)b);
+		}
 		current = b;
 		++pos;
+		r.pos = pos;
+		r.exp = current;
+		cout << "block start" << endl;
 	} else if (utils::isGroupEnd(c)) {
 		lastCtx = current->last->last;
 		current = current->last;
 		++pos;
+		r.exp = current;
+		r.pos = pos;
+		cout << "block end" << endl;
 	} else if (utils::isOp(c)) {
 		++pos;
 		ast::Operator* op = new ast::Operator();
@@ -52,10 +61,9 @@ ParseResult Parser::parseToExpression(int pos) {
 			current->cast<ast::Block>()->list.push_back((ast::Expression*)op);
 		}
 		// return result
-		ParseResult ret;
-		ret.pos = pos;
-		ret.exp = (ast::Expression*)op;
-		return ret;
+		r.pos = pos;
+		r.exp = (ast::Expression*)op;
+		cout << "operator '" << c << "'" << endl;
 	}
 	return r;
 }
@@ -78,5 +86,6 @@ ParseResult Parser::parseConstant(int pos) {
 	ast::Constant* ret = new ast::Constant();
 	ret->value = std::stod(constant);
 	r.exp = ret->toExpression();
+	cout << "constant '" << ret->value << "'" << endl;
 	return r;
 }
