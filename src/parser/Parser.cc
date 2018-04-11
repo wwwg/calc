@@ -48,7 +48,7 @@ ParseResult Parser::parseToExpression(int pos) {
 			c2 = raw[pos];
 			ParseResult res = parseToExpression(pos);
 			pos = res.pos;
-			b->list.push_back(res.exp);
+			if (res.exp != nullptr) b->list.push_back(res.exp);
 		}
 		cout << "end block " << raw[pos] << endl;
 		++pos;
@@ -70,6 +70,9 @@ ParseResult Parser::parseToExpression(int pos) {
 		r.pos = pos;
 		r.exp = (ast::Expression*)op;
 		last = r.exp;
+	} else if (utils::isGroupEnd(c)) {
+		++pos;
+		return parseToExpression(pos);
 	} else {
 		cout << "recieved unknown token: '" << c << "' at pos " << pos << endl;
 	}
