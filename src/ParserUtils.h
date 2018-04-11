@@ -9,10 +9,14 @@
 
 #include "AST.h"
 
+using namespace std;
+
 namespace utils {
 	bool isNumber(char);
 	bool isGroupStart(char);
 	bool isGroupEnd(char);
 	ast::Operation toOp(char);
 	bool isOp(char);
+	void putIndent(int);
+	void putast(ast::AST*);
 };
