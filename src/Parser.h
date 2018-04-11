@@ -19,4 +19,5 @@ protected:
 	ParseResult parseConstant(int);
 	ast::Expression* last;
 	ast::Block* currBlock;
+	ast::Block* lastBlock;
 };

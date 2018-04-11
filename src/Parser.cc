@@ -29,7 +29,9 @@ ParseResult Parser::parseToExpression(int pos) {
 		r = res;
 		last = res.exp;
 	} else if (utils::isGroupStart(c)) {
-		// todo : parse groups
+		ast::Block* b = new ast::Block();
+		lastBlock = currBlock;
+		currBlock = b;
 	}
 	return r;
 }
@@ -37,7 +39,6 @@ ParseResult Parser::parseConstant(int pos) {
 	ParseResult r;
 	r.pos = pos;
 	r.exp = nullptr;
-
 	if (pos > raw.length()) {
 		return r;
 	}
