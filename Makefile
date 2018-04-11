@@ -2,8 +2,8 @@ SRC=$(wildcard src/*.cc src/**/*.cc)
 OBJS=$(SRC:.cc=.o)
 OUT=./calc
 CC=clang++
-CCOPTS=-std=c++14 -c -Wall
-LDOPTS=-lpthread
+CCOPTS=-std=c++14 -c -Wall -g
+LDOPTS=-lpthread -g
 
 default: $(SRC) $(OUT)
 
