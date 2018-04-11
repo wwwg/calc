@@ -8,9 +8,8 @@ Parser::Parser(string _raw) {
 }
 bool Parser::parse() {
 	if (tree == nullptr) return false;
-	ParseResult res = parseToExpression(globalPos);
-	globalPos = res.pos;
-	tree->base = res.exp;
+	tree->base = new ast::Block();
+	currBlock = tree->base;
 	return true;
 }
 string Parser::getError() {
