@@ -34,6 +34,7 @@ namespace ast {
 	};
 	class Expression {
 	public:
+		Expression* last;
 		ExpressionId id;
 		Expression() {
 			id = NoneId;
@@ -78,12 +79,11 @@ namespace ast {
 	class Block : public SpecificExpression<ExpressionId::GroupId> {
 	public:
 		ExpressionList list;
-		Expression* last;
 		Block() { }
 	};
 	class AST {
 	public:
-		Expression* base;
+		Block* base;
 		AST() { }
 	};
 };

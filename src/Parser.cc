@@ -9,8 +9,9 @@ Parser::Parser(string _raw) {
 bool Parser::parse() {
 	if (tree == nullptr) return false;
 	tree->base = new ast::Block();
-	currBlock = tree->base;
-	tree->base->push_back(parseToExpression(globalPos));
+	current = (ast::Expression*)tree->base;
+	ParseResult res = parseToExpression(globalPos);
+	tree->base->list.push_back(res.exp);
 	return true;
 }
 string Parser::getError() {
@@ -31,11 +32,11 @@ ParseResult Parser::parseToExpression(int pos) {
 		parseToExpression(res.pos);
 	} else if (utils::isGroupStart(c)) {
 		ast::Block* b = new ast::Block();
-		b->last = currBlock;
-		currBlock = b;
+		b->last = current;
+		current = b;
 	} else if (utils::isGroupEnd(c)) {
-		lastBlock = currBlock->last->last;
-		currBlock = currBlock->last;
+		lastCtx = current->last->last;
+		current = current->last;
 	}
 	return r;
 }
