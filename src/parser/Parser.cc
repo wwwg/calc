@@ -40,22 +40,17 @@ ParseResult Parser::parseToExpression(int pos) {
 		return parseToExpression(pos);
 	} else if (utils::isGroupStart(c)) {
 		ast::Block* b = new ast::Block();
-		b->last = current;
-		if (current->is<ast::Block>()) {
-			current->cast<ast::Block>()->list.push_back((ast::Expression*)b);
+		++pos;
+		char c2;
+		while (!utils::isGroupEnd(c2)) {
+			// TODO : handle unmatched group ends
+			c2 = raw[pos];
+			ParseResult res = parseToExpression(pos);
+			pos = res.pos;
+			b->list.push_back(res.exp);
 		}
-		current = b;
-		++pos;
 		r.pos = pos;
-		r.exp = current;
-		cout << "block start" << endl;
-	} else if (utils::isGroupEnd(c)) {
-		current = current->last;
-		lastCtx = current->last;
-		++pos;
-		r.exp = current;
-		r.pos = pos;
-		cout << "block end" << endl;
+		r.exp = (Expression*)b;
 	} else if (utils::isOp(c)) {
 		cout << "operator '" << c << "'" << endl;
 		++pos;
