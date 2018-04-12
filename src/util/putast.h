@@ -16,4 +16,5 @@ namespace ast {
     
     void put(Expression*, int);
     void put(Expression*);
+    void put(AST*);
 }

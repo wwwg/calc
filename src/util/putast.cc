@@ -57,3 +57,6 @@ void ast::put(Expression* e, int ind) {
 void ast::put(Expression* e) {
     put(e, 0);
 }
+void ast::put(AST* a) {
+    put(a->base);
+}
