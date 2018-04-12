@@ -4,6 +4,7 @@
 struct ParseResult {
 	int pos;
 	ast::Expression* exp;
+	unsigned char flag = 0;
 };
 class Parser {
 public:

@@ -33,6 +33,7 @@ ParseResult Parser::parseToExpression(int pos) {
 				last->cast<ast::Operator>()->right = res.exp;
 				r.exp = last;
 				r.pos = pos;
+				r.flag = 0xFF;
 				return r;
 			}
 		}
@@ -65,10 +66,13 @@ ParseResult Parser::parseToExpression(int pos) {
 		last = (ast::Expression*)op;
 		ParseResult rightParse = parseToExpression(pos);
 		if (rightParse.exp != nullptr) {
-			op->right = rightParse.exp;
+			if (rightParse.flag != 0xFF) {
+				op->right = rightParse.exp;	
+			}
 		} else {
 			op->right = last;
 		}
+		pos = rightParse.pos;
 		cout << "done parsing right side of operator '" << c << "'" << endl;
 		// return result
 		r.pos = pos;
