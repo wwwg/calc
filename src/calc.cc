@@ -3,11 +3,16 @@
 #include "AST.h"
 #include "util/putast.h"
 
-#define EXPRESSION "9+(3-2)"
-
-int main() {
+int main(int argc, char** argv) {
+	if (argc < 2) {
+		cout << "invalid arguments:" << endl
+		<< "calc \"expression\"" << endl;
+		return 1;
+	}
+	string expression = string(argv[1]);
+	
 	ast::AST tree = ast::AST();
-	Parser p(EXPRESSION);
+	Parser p(expression);
 	p.tree = &tree;
 	p.parse();
 	cout << endl << endl;
