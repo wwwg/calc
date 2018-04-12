@@ -1,7 +1,7 @@
 #include "putast.h"
 
 void ast::indent(int indents) {
-    for (int i = 0; i < indents; ++i) cout << "\t";
+    for (int i = 0; i < indents; ++i) cout << " ";
 }
 void ast::put(Constant* c, int ind) {
     indent(ind);
@@ -37,7 +37,7 @@ void ast::put(Operator* o, int ind) {
 }
 void ast::put(Block* b, int ind) {
     indent(ind);
-    cout << "Block (";
+    cout << "Block (" << endl;
     for (int i = 0; i < b->list.size(); ++i) {
         Expression* e = b->list.at(i);
         put(e, ind + 1);
