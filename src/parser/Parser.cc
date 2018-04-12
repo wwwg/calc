@@ -64,8 +64,12 @@ ParseResult Parser::parseToExpression(int pos) {
 		cout << "parsing right side of operator '" << c << "'" << endl;
 		last = (ast::Expression*)op;
 		ParseResult rightParse = parseToExpression(pos);
-		cout << "done parsing right side of operator '" << c << "'" << endl; 
-		op->right = rightParse.exp;
+		if (rightParse.exp != nullptr) {
+			op->right = rightParse.exp;
+		} else {
+			op->right = last;
+		}
+		cout << "done parsing right side of operator '" << c << "'" << endl;
 		// return result
 		r.pos = pos;
 		r.exp = (ast::Expression*)op;
