@@ -2,6 +2,7 @@
 #include "parser/ParserUtils.h"
 #include "AST.h"
 #include "util/putast.h"
+#include "evaluators/eval.h"
 
 int main(int argc, char** argv) {
 	if (argc < 2) {
@@ -14,6 +15,10 @@ int main(int argc, char** argv) {
 	Parser p(expression);
 	p.tree = &tree;
 	p.parse();
+	cout << "Abstract syntax tree:" << endl;
 	ast::put(&tree);
+	cout << endl;
+	double res = eval::eval(&tree);
+	cout << "evaluated value: " << res << endl;
 	return 0;
 }
