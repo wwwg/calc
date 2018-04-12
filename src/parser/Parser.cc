@@ -82,7 +82,9 @@ ParseResult Parser::parseToExpression(int pos) {
 		++pos;
 		return parseToExpression(pos);
 	} else {
-		cout << "recieved unknown token: '" << c << "' at pos " << pos << endl;
+		cout << "recieved unknown token: '" << c << "' at pos " << pos << ", skipping." << endl;
+		++pos;
+		return parseToExpression(pos);
 	}
 	return r;
 }
