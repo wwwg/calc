@@ -35,6 +35,7 @@ ast::Operation utils::toOp(char c) {
 	if (c == '/') ret = ast::Operation::Div;
 	if (c == '*') ret = ast::Operation::Mul;
 	if (c == '^') ret = ast::Operation::Pow;
+	if (c == '=') ret = ast::Operation::Eq;
 	return ret;
 }
 bool utils::isOp(char c) {
@@ -43,7 +44,8 @@ bool utils::isOp(char c) {
 		c == '-' ||
 		c == '*' ||
 		c == '^' ||
-		c == '/'
+		c == '/' ||
+		c == '='
 	) return true;
 	return false;
 }

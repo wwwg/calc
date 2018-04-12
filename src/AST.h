@@ -30,6 +30,7 @@ namespace ast {
 		Mul,
 		Div,
 		Pow,
+		Eq,
 		Nop = 0
 	};
 	class Expression {

@@ -47,7 +47,7 @@ ParseResult Parser::parseToExpression(int pos) {
 			c2 = raw[pos];
 			ParseResult res = parseToExpression(pos);
 			pos = res.pos;
-			if (pos + 1 >= raw.length()) {
+			if (pos >= raw.length()) {
 				cout << "FATAL: unmatched brace detected" << endl;
 				die();
 			}
