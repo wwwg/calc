@@ -25,6 +25,10 @@ void ast::put(Operator* o, int ind) {
         case Operation::Pow:
             op = '^';
             break;
+        
+        case Operation::Eq:
+            op = '=';
+            break;
     }
     indent(ind);
     cout << "Operator '" << op << "' {" << endl;
