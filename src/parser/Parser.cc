@@ -76,6 +76,9 @@ ParseResult Parser::parseToExpression(int pos) {
 		last = r.exp;
 	} else if (utils::isGroupEnd(c)) {
 		// ++pos; return parseToExpression(pos);
+	} else if (utils::isWhitespace(c)) {
+		++pos;
+		return parseToExpression(pos);
 	} else {
 		cout << "recieved unknown token: '" << c << "' at pos " << pos << endl;
 	}
