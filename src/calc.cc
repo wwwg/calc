@@ -1,6 +1,7 @@
 #include "parser/Parser.h"
 #include "parser/ParserUtils.h"
 #include "AST.h"
+#include "util/putast.h"
 
 #define EXPRESSION "9+(3-2)"
 
@@ -9,6 +10,5 @@ int main() {
 	Parser p(EXPRESSION);
 	p.tree = &tree;
 	p.parse();
-	utils::putast(&tree);
 	return 0;
 }
