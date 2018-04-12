@@ -39,3 +39,6 @@ double eval::eval(ast::Expression* e) {
     if (e->is<ast::Block>()) return eval(e->cast<ast::Block>());
     return 0.0;
 }
+double eval::eval(ast::AST* tree) {
+    return eval(tree->base);
+}
