@@ -1,5 +1,6 @@
 #pragma once
 #include "../AST.h"
+#include <unistd.h>
 
 struct ParseResult {
 	int pos;
@@ -21,4 +22,5 @@ protected:
 	ast::Expression* last;
 	ast::Expression* current;
 	ast::Expression* lastCtx;
+	void die(void);
 };

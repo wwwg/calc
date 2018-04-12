@@ -44,10 +44,13 @@ ParseResult Parser::parseToExpression(int pos) {
 		++pos;
 		char c2 = '\0';
 		while (!utils::isGroupEnd(c2)) {
-			// TODO : handle unmatched group ends
 			c2 = raw[pos];
 			ParseResult res = parseToExpression(pos);
 			pos = res.pos;
+			if (pos + 1 >= raw.length()) {
+				cout << "FATAL: unmatched brace detected" << endl;
+				die();
+			}
 			if (res.exp != nullptr) b->list.push_back(res.exp);
 		}
 		++pos;
@@ -103,4 +106,7 @@ ParseResult Parser::parseConstant(int pos) {
 	ret->value = std::stod(constant);
 	r.exp = ret->toExpression();
 	return r;
+}
+void Parser::die(void) {
+	exit(1);
 }
