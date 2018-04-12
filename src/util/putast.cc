@@ -46,6 +46,7 @@ void ast::put(Block* b, int ind) {
     cout << ")" << endl;
 }
 void ast::put(Expression* e, int ind) {
+    if (e == nullptr) return;
     if (e->is<Constant>()) {
         put(e->cast<Constant>(), ind);
     } else if (e->is<Operator>()) {
