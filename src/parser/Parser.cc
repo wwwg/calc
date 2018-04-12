@@ -41,7 +41,6 @@ ParseResult Parser::parseToExpression(int pos) {
 		return parseToExpression(pos);
 	} else if (utils::isGroupStart(c)) {
 		ast::Block* b = new ast::Block();
-		cout << "block " << c << endl;
 		++pos;
 		char c2 = '\0';
 		while (!utils::isGroupEnd(c2)) {
@@ -51,18 +50,15 @@ ParseResult Parser::parseToExpression(int pos) {
 			pos = res.pos;
 			if (res.exp != nullptr) b->list.push_back(res.exp);
 		}
-		cout << "end block " << raw[pos] << endl;
 		++pos;
 		r.pos = pos;
 		r.exp = (ast::Expression*)b;
 	} else if (utils::isOp(c)) {
-		cout << "operator '" << c << "'" << endl;
 		++pos;
 		ast::Operator* op = new ast::Operator();
 		op->operation = utils::toOp(c);
 		op->left = last;
 		// right needs to be parsed next
-		cout << "parsing right side of operator '" << c << "'" << endl;
 		last = (ast::Expression*)op;
 		ParseResult rightParse = parseToExpression(pos);
 		if (rightParse.exp != nullptr) {
@@ -73,7 +69,6 @@ ParseResult Parser::parseToExpression(int pos) {
 			op->right = last;
 		}
 		pos = rightParse.pos;
-		cout << "done parsing right side of operator '" << c << "'" << endl;
 		// return result
 		r.pos = pos;
 		r.exp = (ast::Expression*)op;
@@ -107,6 +102,5 @@ ParseResult Parser::parseConstant(int pos) {
 	ast::Constant* ret = new ast::Constant();
 	ret->value = std::stod(constant);
 	r.exp = ret->toExpression();
-	cout << "constant " << ret->value << endl;
 	return r;
 }
