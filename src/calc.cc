@@ -10,6 +10,7 @@ int main() {
 	Parser p(EXPRESSION);
 	p.tree = &tree;
 	p.parse();
+	cout << endl << endl;
 	ast::put(&tree);
 	return 0;
 }

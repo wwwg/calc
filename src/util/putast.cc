@@ -1,7 +1,7 @@
 #include "putast.h"
 
 void ast::indent(int indents) {
-    for (int i = 0; i < indents; ++i) cout << " ";
+    for (int i = 0; i < indents; ++i) cout << "  ";
 }
 void ast::put(Constant* c, int ind) {
     indent(ind);
@@ -27,13 +27,19 @@ void ast::put(Operator* o, int ind) {
             break;
     }
     indent(ind);
-    cout << "Operator '" << op << "' :" << endl;
+    cout << "Operator '" << op << "' {" << endl;
     indent(ind + 1);
-    cout << "Left:" << endl;
+    cout << "Left [" << endl;
     put(o->left, ind + 2);
-    cout << "Right:" << endl;
+    indent(ind + 1);
+    cout << "]," << endl;
+    indent(ind + 1);
+    cout << "Right [" << endl;
     put(o->right, ind + 2);
-    cout << endl;
+    indent(ind + 1);
+    cout << "]" << endl;
+    indent(ind);
+    cout << "}" << endl;
 }
 void ast::put(Block* b, int ind) {
     indent(ind);
@@ -46,7 +52,11 @@ void ast::put(Block* b, int ind) {
     cout << ")" << endl;
 }
 void ast::put(Expression* e, int ind) {
-    if (e == nullptr) return;
+    if (e == nullptr) {
+        indent(ind);
+        cout << "(null expression)" << endl;
+        return;
+    }
     if (e->is<Constant>()) {
         put(e->cast<Constant>(), ind);
     } else if (e->is<Operator>()) {
