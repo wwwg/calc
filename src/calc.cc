@@ -10,12 +10,10 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 	string expression = string(argv[1]);
-	
 	ast::AST tree = ast::AST();
 	Parser p(expression);
 	p.tree = &tree;
 	p.parse();
-	cout << endl << endl;
 	ast::put(&tree);
 	return 0;
 }
