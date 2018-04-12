@@ -17,5 +17,9 @@ namespace eval {
         X86Assembler* assembler;
         ast::AST* tree;
         JitEvaluator(ast::AST*);
+        void generate(void);
+        JitFunction getFunction(void);
+    protected:
+        JitFunction fn;
     };
 }
