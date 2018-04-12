@@ -13,3 +13,6 @@ void eval::JitEvaluator::generate() {
 eval::JitFunction eval::JitEvaluator::getFunction(void) {
     return fn;
 }
+void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
+    // todo
+}

@@ -19,6 +19,11 @@ namespace eval {
         JitEvaluator(ast::AST*);
         void generate(void);
         JitFunction getFunction(void);
+        // assemble methods
+        void assembleExpression(ast::Operator*);
+        // todo
+        // void assembleExpression(ast::Block*);
+        // void assembleExpression(ast::Expression*);
     protected:
         JitFunction fn;
     };
