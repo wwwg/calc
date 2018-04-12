@@ -47,13 +47,10 @@ bool utils::isOp(char c) {
 	) return true;
 	return false;
 }
-void utils::putIndent(int id) {
-	for (int i = 0; i < id; ++i) cout << " ";
-}
-void utils::putast(ast::AST* a) {
-	/* int indent = 0;
-	for (const auto& e : a->base->list) {
-	 	//
-	} */
-	cout << a->base->list.size() << endl;
+bool utils::isWhitespace(char c) {
+	if (
+		c == ' ' ||
+		c == '\t'
+	) return true;
+	return false;
 }

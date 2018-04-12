@@ -17,6 +17,5 @@ namespace utils {
 	bool isGroupEnd(char);
 	ast::Operation toOp(char);
 	bool isOp(char);
-	void putIndent(int);
-	void putast(ast::AST*);
+	bool isWhitespace(char);
 };
