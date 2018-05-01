@@ -56,6 +56,11 @@ ParseResult Parser::parseToExpression(int pos) {
 		++pos;
 		r.pos = pos;
 		r.exp = (ast::Expression*)b;
+		if (!(pos >= raw.length())) {
+			// There's information past this block
+			last = r.exp;
+			return parseToExpression(pos);
+		}
 	} else if (utils::isOp(c)) {
 		++pos;
 		ast::Operator* op = new ast::Operator();

@@ -1,3 +1,5 @@
+#ifdef CALC_JIT
+
 #pragma once
 
 #include <cstdlib>
@@ -28,3 +30,5 @@ namespace eval {
         JitFunction fn;
     };
 }
+
+#endif

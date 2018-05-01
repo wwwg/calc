@@ -1,3 +1,5 @@
+#ifdef CALC_JIT
+
 #include "jit.h"
 
 eval::JitEvaluator::JitEvaluator(ast::AST* _tree) {
@@ -16,3 +18,5 @@ eval::JitFunction eval::JitEvaluator::getFunction(void) {
 void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
     // todo
 }
+
+#endif
