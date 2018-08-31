@@ -26,7 +26,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 	} else {
 		// leftmost value is a constant
 		// Move the leftmost value into ebx
-		as->mov(x86::ebx, o->left->value);
+		as->mov(x86::ebx, o->left->cast<ast::Constant>()->value);
 	}
 	// assemble rightmost value
 	if (o->right->is<ast::Block>()) {
@@ -37,7 +37,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		as->pop(x86::edx);
 	} else {
 		// rightmost value is a constant, mov into edx
-		as->mov(x86::edx, o->right->value);
+		as->mov(x86::edx, o->right-><ast::Constant>()->value);
 	}
     switch (o->operation) {
     	case ast::Operation::Add:
