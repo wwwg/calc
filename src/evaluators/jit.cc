@@ -7,7 +7,7 @@ eval::JitEvaluator::JitEvaluator(ast::AST* _tree) {
     as = new X86Assembler(code);
     code->init(runtime->getCodeInfo());
 }
-void eval::JitEvaluator::generateTo(JitFunction* fn) {
+void eval::JitEvaluator::generateTo(JitFunction fn) {
 	// Assemble the base of the tree
 	assembleExpression(tree->base);
 	// After all the assembly has been done, the result will be in ebx
