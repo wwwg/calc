@@ -10,6 +10,7 @@ eval::JitEvaluator::JitEvaluator(ast::AST* _tree) {
     code->init(runtime->getCodeInfo());
 }
 void eval::JitEvaluator::generate() {
+	assembleExpression(tree->base);
     runtime->add(&fn, code);
 }
 eval::JitFunction eval::JitEvaluator::getFunction(void) {
