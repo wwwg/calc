@@ -1,0 +1,38 @@
+Abstract syntax tree:
+Block (
+  Operator '+' {
+    Left [
+      Constant '1'
+    ],
+    Right [
+      Operator '-' {
+        Left [
+          Block (
+            Operator '*' {
+              Left [
+                Constant '4'
+              ],
+              Right [
+                Constant '3'
+              ]
+            }
+          )
+        ],
+        Right [
+          Block (
+            Operator '+' {
+              Left [
+                Constant '5'
+              ],
+              Right [
+                Constant '3'
+              ]
+            }
+          )
+        ]
+      }
+    ]
+  }
+)
+
+evaluated value: 5
