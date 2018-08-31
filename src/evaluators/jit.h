@@ -1,4 +1,5 @@
-#ifdef CALC_JIT
+#ifndef CALC_JIT
+#define CALC_JIT
 
 #pragma once
 
