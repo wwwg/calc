@@ -17,11 +17,17 @@ eval::JitFunction eval::JitEvaluator::getFunction(void) {
     return fn;
 }
 void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
-	// Move the leftmost value into ebx
 	if (o->left->is<ast::Block>()) {
+		// leftmost value is an operator
+		// assemble the operator
 		assembleExpression(o);
+		// the operator was pushed on the stack, pop it back off
+		as.pop(x86::ebx);
+	} else {
+		// leftmost value is a constant
+		// Move the leftmost value into ebx
+		as.mov(x86::ebx, o->left);
 	}
-	as.mov(x86::ebx, o->left);
     switch (o->operation) {
     	case ast::Operation::Add:
     		as.add(x86::ebx, o->right);
