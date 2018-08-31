@@ -24,10 +24,15 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		assembleExpression(lop2);
 		// the operator was pushed on the stack, pop it back off
 		as->pop(x86::ebx);
-	} else {
-		// leftmost value is a constant
-		// Move the leftmost value into ebx
-		as->mov(x86::ebx, (int)o->left->cast<ast::Constant>()->value);
+	} else if (o->left->is<ast::Constant>()) {
+		// leftmost value is a constant, mov into edx
+		ast::Constant* c = o->left->cast<ast::Constant>();
+		as->mov(x86::edx, (int)c->value);
+	} else if (o->left->is<ast::Operator>()) {
+		ast::Operator* rop2 = o->left->cast<ast::Operator>();
+		assembleExpression(rop2);
+		// pop the return value to edx
+		as->pop(x86::edx);
 	}
 	// assemble rightmost value
 	if (o->right->is<ast::Block>()) {
@@ -37,9 +42,15 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		assembleExpression(rop2);
 		// pop the return value to edx
 		as->pop(x86::edx);
-	} else {
+	} else if (o->right->is<ast::Constant>()) {
 		// rightmost value is a constant, mov into edx
-		as->mov(x86::edx, (int)o->right->cast<ast::Constant>()->value);
+		ast::Constant* c = o->right->cast<ast::Constant>();
+		as->mov(x86::edx, (int)c->value);
+	} else if (o->right->is<ast::Operator>()) {
+		ast::Operator* rop2 = o->right->cast<ast::Operator>();
+		assembleExpression(rop2);
+		// pop the return value to edx
+		as->pop(x86::edx);
 	}
     switch (o->operation) {
     	case ast::Operation::Add:
