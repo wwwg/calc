@@ -25,8 +25,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		// leftmost value is an operator
 		// assemble the operator
 		ast::Block* lb = o->left->cast<ast::Block>();
-		ast::Operator* lop2 = (lb->list.at(0))->cast<ast::Operator>();
-		assembleExpression(lop2);
+		assembleExpression(lb);
 		// the operator was pushed on the stack, pop it back off
 		as->pop(x86::ebx);
 	} else if (o->left->is<ast::Constant>()) {
@@ -43,11 +42,10 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 	if (o->right->is<ast::Block>()) {
 		// rightmost expression is an operator
 		ast::Block* rb = o->right->cast<ast::Block>();
-		ast::Operator* rop2 = (rb->list.at(0))->cast<ast::Operator>();
 		if (o->left->is<ast::Constant>()) {
 			// push the constant onto the stack
 			as->push(x86::ebx);
-			assembleExpression(rop2);
+			assembleExpression(rb);
 			/*
 				After the expression has been assembled, the top of the stack looks like this:
 				
@@ -57,8 +55,9 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 			as->pop(x86::ebx); // left expression
 			as->pop(x86::edx); // right expression
 		} else {
-			// left expression is an operation
-			// the top of the stack has the operation result
+			// the result of leftmost operator is in ebx, put it on the stack
+			as->push(x86::ebx);
+			assembleExpression(rb);
 		}
 	} else if (o->right->is<ast::Constant>()) {
 		// rightmost value is a constant, mov into edx
