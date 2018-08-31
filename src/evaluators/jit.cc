@@ -36,5 +36,8 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
     		break;
     }
 }
+void eval::JitEvaluator::assembleExpression(ast::block* o) {
+	//
+}
 
 #endif
