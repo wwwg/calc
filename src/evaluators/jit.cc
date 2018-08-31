@@ -7,17 +7,14 @@ eval::JitEvaluator::JitEvaluator(ast::AST* _tree) {
     as = new X86Assembler(code);
     code->init(runtime->getCodeInfo());
 }
-void eval::JitEvaluator::generate() {
+void eval::JitEvaluator::generateTo(JitFunction* fn) {
 	// Assemble the base of the tree
 	assembleExpression(tree->base);
 	// After all the assembly has been done, the result will be in ebx
 	as->mov(x86::eax, x86::ebx);
 	as->ret();
 	// Code generation complete
-    runtime->add(&fn, code);
-}
-eval::JitFunction eval::JitEvaluator::getCompiledFunction(void) {
-    return fn;
+    Error err = runtime->add(&fn, code);
 }
 void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 	// assemble leftmost value

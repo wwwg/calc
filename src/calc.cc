@@ -21,9 +21,9 @@ int main(int argc, char** argv) {
 	cout << endl;
 
 	eval::JitEvaluator je = eval::JitEvaluator(&tree);
-	je.generate();
-	eval::JitFunction jitExpression = je.getCompiledFunction();
-	int result = jitExpression(); // call the compiled function
+	eval::JitFunction fn;
+	je.generateTo(&fn);
+	int result = fn(); // call the compiled function
 	cout << "JIT compiled result: " << result << endl;
 
 	return 0;

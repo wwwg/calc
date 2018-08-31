@@ -21,14 +21,11 @@ namespace eval {
         X86Assembler* as;
         ast::AST* tree;
         JitEvaluator(ast::AST*);
-        void generate(void);
-        JitFunction getCompiledFunction(void);
+        void generateTo(JitFunction*);
         // assemble methods
         void assembleExpression(ast::Operator*);
         void assembleExpression(ast::Block*);
         // void assembleExpression(ast::Expression*);
-    protected:
-        JitFunction fn;
     };
 }
 
