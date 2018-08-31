@@ -22,7 +22,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		ast::Operator* lop2 = (o->left->cast<ast::Block>()->list.at(0))->cast<ast::Operator>();
 		assembleExpression(lop2);
 		// the operator was pushed on the stack, pop it back off
-		as.pop(x86::ebx);
+		as->pop(x86::ebx);
 	} else {
 		// leftmost value is a constant
 		// Move the leftmost value into ebx
@@ -60,5 +60,5 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 void eval::JitEvaluator::assembleExpression(ast::block* o) {
 	ast::Operator* inner = o->list.at(0); // Every block has one operator in it
 	assembleExpression(inner);
-	as.push(x86::ebx);
+	as->push(x86::ebx);
 }
