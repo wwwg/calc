@@ -41,11 +41,20 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		ast::Operator* rop2 = (rb->list.at(0))->cast<ast::Operator>();
 		if (o->left->is<ast::Constant>()) {
 			// push the constant onto the stack
-			as->push(x86::ebx);
+			as->push(x86::edx);
+			assembleExpression(rop2);
+			/*
+				After the expression has been assembled, the top of the stack looks like this:
+				
+				[result of block assembly (right)]
+				[constant (left)]
+			*/
+			as->pop(x86::edx); // right expression
+			as->pop(x86::ebx); // left expression
+		} else {
+			// left expression is an operation
+			// the top of the stack has the operation result
 		}
-		assembleExpression(rop2);
-		// pop the return value to edx
-		as->pop(x86::edx);
 	} else if (o->right->is<ast::Constant>()) {
 		// rightmost value is a constant, mov into edx
 		ast::Constant* c = o->right->cast<ast::Constant>();
