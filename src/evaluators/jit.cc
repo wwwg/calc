@@ -21,7 +21,8 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 	if (o->left->is<ast::Block>()) {
 		// leftmost value is an operator
 		// assemble the operator
-		assembleExpression(o->left);
+		ast::Operator* lop2 = (o->left->cast<ast::Block>()->list.at(0))->cast<ast::Operator>();
+		assembleExpression(op2);
 		// the operator was pushed on the stack, pop it back off
 		as.pop(x86::ebx);
 	} else {
@@ -32,7 +33,8 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 	// assemble rightmost value
 	if (o->right->is<ast::Block>()) {
 		// rightmost expression is an operator
-		assembleExpression(o->right);
+		ast::Operator* rop2 = (o->left->cast<ast::Block>()->list.at(0))->cast<ast::Operator>();
+		assembleExpression(rop2);
 		// pop the return value to edx
 		as.pop(x86::edx);
 	} else {
