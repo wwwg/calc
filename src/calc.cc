@@ -23,6 +23,8 @@ int main(int argc, char** argv) {
 	eval::JitEvaluator je = eval::JitEvaluator(&tree);
 	je.generate();
 	eval::JitFunction jitExpression = je.getCompiledFunction();
+	int result = jitExpression(); // call the compiled function
+	cout << "JIT compiled result: " << result << endl;
 
 	return 0;
 }
