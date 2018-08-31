@@ -20,7 +20,8 @@ int main(int argc, char** argv) {
 	ast::put(&tree);
 	cout << endl;
 
-	//
+	eval::JitEvaluator je(&tree);
+	je.generate();
 
 	return 0;
 }
