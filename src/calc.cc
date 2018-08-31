@@ -22,6 +22,7 @@ int main(int argc, char** argv) {
 
 	eval::JitEvaluator je = eval::JitEvaluator(&tree);
 	je.generate();
+	eval::JitFunction jitExpression = je.getCompiledFunction();
 
 	return 0;
 }

@@ -16,7 +16,7 @@ void eval::JitEvaluator::generate() {
 	// Code generation complete
     runtime->add(&fn, code);
 }
-eval::JitFunction eval::JitEvaluator::getFunction(void) {
+eval::JitFunction eval::JitEvaluator::getCompiledFunction(void) {
     return fn;
 }
 void eval::JitEvaluator::assembleExpression(ast::Operator* o) {

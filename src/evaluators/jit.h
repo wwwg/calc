@@ -22,7 +22,7 @@ namespace eval {
         ast::AST* tree;
         JitEvaluator(ast::AST*);
         void generate(void);
-        JitFunction getFunction(void);
+        JitFunction getCompiledFunction(void);
         // assemble methods
         void assembleExpression(ast::Operator*);
         void assembleExpression(ast::Block*);
