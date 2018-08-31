@@ -16,7 +16,7 @@ namespace eval {
     public:
         JitRuntime* runtime;
         CodeHolder* code;
-        X86Assembler* assembler;
+        X86Assembler* as;
         ast::AST* tree;
         JitEvaluator(ast::AST*);
         void generate(void);
