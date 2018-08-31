@@ -3,6 +3,7 @@
 #include "AST.h"
 #include "util/putast.h"
 #include "evaluators/eval.h"
+#include "evaluators/jit.h"
 
 int main(int argc, char** argv) {
 	if (argc < 2) {
