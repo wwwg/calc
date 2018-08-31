@@ -8,7 +8,12 @@ eval::JitEvaluator::JitEvaluator(ast::AST* _tree) {
     code->init(runtime->getCodeInfo());
 }
 void eval::JitEvaluator::generate() {
+	// Assemble the base of the tree
 	assembleExpression(tree->base);
+	// After all the assembly has been done, the result will be in ebx
+	as->mov(x86::eax, x86::ebx);
+	as->ret();
+	// Code generation complete
     runtime->add(&fn, code);
 }
 eval::JitFunction eval::JitEvaluator::getFunction(void) {
@@ -49,8 +54,8 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 				[result of block assembly (right)]
 				[constant (left)]
 			*/
-			as->pop(x86::ebx); // right expression
-			as->pop(x86::edx); // left expression
+			as->pop(x86::ebx); // left expression
+			as->pop(x86::edx); // right expression
 		} else {
 			// left expression is an operation
 			// the top of the stack has the operation result
