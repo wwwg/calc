@@ -26,7 +26,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 	} else {
 		// leftmost value is a constant
 		// Move the leftmost value into ebx
-		as.mov(x86::ebx, o->left->value);
+		as->mov(x86::ebx, o->left->value);
 	}
 	// assemble rightmost value
 	if (o->right->is<ast::Block>()) {
@@ -34,23 +34,23 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		ast::Operator* rop2 = (o->left->cast<ast::Block>()->list.at(0))->cast<ast::Operator>();
 		assembleExpression(rop2);
 		// pop the return value to edx
-		as.pop(x86::edx);
+		as->pop(x86::edx);
 	} else {
 		// rightmost value is a constant, mov into edx
-		as.mov(x86::edx, o->right->value);
+		as->mov(x86::edx, o->right->value);
 	}
     switch (o->operation) {
     	case ast::Operation::Add:
-    		as.add(x86::ebx, x86::edx);
+    		as->add(x86::ebx, x86::edx);
     		break;
     	case ast::Operation::Sub:
-    		as.sub(x86::ebx, x86::edx);
+    		as->sub(x86::ebx, x86::edx);
     		break;
     	case ast::Operation::Mul:
-    		as.mul(x86::ebx,x86::edx);
+    		as->mul(x86::ebx,x86::edx);
     		break;
     	case ast::Operation::Div:
-    		as.div(x86::ebx, x86::edx);
+    		as->div(x86::ebx, x86::edx);
     		break;
     	case ast::Operation::Pow:
     		// todo
