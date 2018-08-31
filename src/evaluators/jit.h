@@ -12,7 +12,8 @@ using namespace asmjit;
 using namespace std;
 
 namespace eval {
-    typedef double (*JitFunction)(void);
+    typedef int (*JitFunction)(void);
+    typedef double (*JitFunction_d)(void);
     class JitEvaluator {
     public:
         JitRuntime* runtime;

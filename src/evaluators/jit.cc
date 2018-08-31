@@ -58,6 +58,8 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 			// the result of leftmost operator is in ebx, put it on the stack
 			as->push(x86::ebx);
 			assembleExpression(rb);
+			as->pop(x86::edx); // expression result will now be in ebx
+			as->pop(x86::ebx); // leftmost operator is now in ebx
 		}
 	} else if (o->right->is<ast::Constant>()) {
 		// rightmost value is a constant, mov into edx
