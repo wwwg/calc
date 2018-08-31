@@ -18,7 +18,8 @@ int main(int argc, char** argv) {
 	cout << "Abstract syntax tree:" << endl;
 	ast::put(&tree);
 	cout << endl;
-	double res = eval::eval(&tree);
-	cout << "evaluated value: " << res << endl;
+
+	//
+
 	return 0;
 }
