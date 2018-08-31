@@ -1,5 +1,3 @@
-#ifdef CALC_JIT
-
 #include "jit.h"
 
 eval::JitEvaluator::JitEvaluator(ast::AST* _tree) {
@@ -64,5 +62,3 @@ void eval::JitEvaluator::assembleExpression(ast::block* o) {
 	assembleExpression(inner);
 	as.push(x86::ebx);
 }
-
-#endif
