@@ -1,3 +1,4 @@
 *.o
 calc
 *.so
+.gdb_history
