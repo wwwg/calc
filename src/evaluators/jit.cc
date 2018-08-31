@@ -16,7 +16,19 @@ eval::JitFunction eval::JitEvaluator::getFunction(void) {
     return fn;
 }
 void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
-    // todo
+    switch (o->operation) {
+    	case ast::Operation::Add:
+    		break;
+    	case ast::Operation::Sub:
+    		break;
+    	case ast::Operation::Mul:
+    		break;
+    	case ast::Operation::Div:
+    		break;
+    	case ast::Operation::Pow:
+    		// todo
+    		break;
+    }
 }
 
 #endif
