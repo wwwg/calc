@@ -3,7 +3,7 @@ OBJS=$(SRC:.cc=.o)
 OUT=./calc
 CC=clang++
 CCOPTS=-std=c++14 -c -Wall -g
-LDOPTS=-lpthread -g
+LDOPTS=-lpthread -g -lasmjit
 
 default: $(SRC) $(OUT)
 
