@@ -18,6 +18,9 @@ eval::JitFunction eval::JitEvaluator::getFunction(void) {
 }
 void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 	// Move the leftmost value into ebx
+	if (o->left->is<ast::Block>()) {
+		assembleExpression(o);
+	}
 	as.mov(x86::ebx, o->left);
     switch (o->operation) {
     	case ast::Operation::Add:
@@ -38,7 +41,9 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
     }
 }
 void eval::JitEvaluator::assembleExpression(ast::block* o) {
-	//
+	ast::Operator* inner = o->list.at(0); // Every block has one operator in it
+	assembleExpression(inner);
+	as.push(x86::ebx);
 }
 
 #endif
