@@ -20,7 +20,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		// leftmost value is an operator
 		// assemble the operator
 		ast::Block* lb = o->left->cast<ast::Block>();
-		ast::Operator* lop2 = (o->left->cast<ast::Block>()->list.at(0))->cast<ast::Operator>();
+		ast::Operator* lop2 = (lb->list.at(0))->cast<ast::Operator>();
 		assembleExpression(lop2);
 		// the operator was pushed on the stack, pop it back off
 		as->pop(x86::ebx);
