@@ -39,6 +39,10 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		// rightmost expression is an operator
 		ast::Block* rb = o->right->cast<ast::Block>();
 		ast::Operator* rop2 = (rb->list.at(0))->cast<ast::Operator>();
+		if (o->left->is<ast::Constant>()) {
+			// push the constant onto the stack
+			as->push(x86::ebx);
+		}
 		assembleExpression(rop2);
 		// pop the return value to edx
 		as->pop(x86::edx);
