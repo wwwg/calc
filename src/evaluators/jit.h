@@ -22,7 +22,7 @@ namespace eval {
         X86Assembler* as;
         ast::AST* tree;
         JitEvaluator(ast::AST*);
-        void generateTo(JitFunction);
+        int (*getCompiledFunction(void))(void);
         // assemble methods
         void assembleExpression(ast::Operator*);
         void assembleExpression(ast::Block*);

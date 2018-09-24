@@ -8,13 +8,14 @@ eval::JitEvaluator::JitEvaluator(ast::AST* _tree) {
     code->init(runtime->getCodeInfo());
     as = new X86Assembler(code);
 }
-void eval::JitEvaluator::generateTo(JitFunction fn) {
+int (*eval::JitEvaluator::getCompiledFunction(void))(void) {
+	JitFunction fn;
 	// Assemble the base of the tree
 	assembleExpression(tree->base);
 	// Make sure the return pointer is at the top of the stack
 	if (usedStackSlots < 0) {
 		cout << "something terrible has happened\n";
-		return;
+		return nullptr;
 	}
 	while (--usedStackSlots) {
 		// Pop all the currently used stack slots into one register
@@ -27,7 +28,9 @@ void eval::JitEvaluator::generateTo(JitFunction fn) {
     Error err = runtime->add(&fn, code);
     if (err) {
     	cout << "generation error\n";
+		return nullptr;
     }
+	return fn;
 }
 void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 	// assemble leftmost value
