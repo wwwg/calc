@@ -74,6 +74,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		} else {
 			// the result of leftmost operator is in ebx, put it on the stack
 			as->push(x86::ebx);
+			usedStackSlots++; 
 			assembleExpression(rb);
 			as->pop(x86::edx); // expression result will now be in ebx
 			as->pop(x86::ebx); // leftmost operator is now in ebx
