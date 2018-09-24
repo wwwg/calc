@@ -11,6 +11,15 @@ eval::JitEvaluator::JitEvaluator(ast::AST* _tree) {
 void eval::JitEvaluator::generateTo(JitFunction fn) {
 	// Assemble the base of the tree
 	assembleExpression(tree->base);
+	// Make sure the return pointer is at the top of the stack
+	if (usedStackSlots < 0) {
+		cout << "something terrible has happened\n";
+		return;
+	}
+	while (--usedStackSlots) {
+		// Pop all the currently used stack slots into one register
+		as->pop(x86::ecx);
+	}
 	// After all the assembly has been done, the result will be in ebx
 	as->mov(x86::eax, x86::ebx);
 	as->ret();
@@ -97,5 +106,5 @@ void eval::JitEvaluator::assembleExpression(ast::Block* o) {
 	ast::Operator* inner = o->list.at(0)->cast<ast::Operator>(); // Every block has one operator in it
 	assembleExpression(inner);
 	as->push(x86::ebx);
-	usedStackSlots++:
+	usedStackSlots++;
 }
