@@ -25,6 +25,9 @@ void eval::JitEvaluator::generateTo(JitFunction fn) {
 	as->ret();
 	// Code generation complete
     Error err = runtime->add(&fn, code);
+    if (err) {
+    	cout << "generation error\n";
+    }
 }
 void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 	// assemble leftmost value
