@@ -26,6 +26,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		assembleExpression(lb);
 		// the operator was pushed on the stack, pop it back off
 		as->pop(x86::ebx);
+		usedStackSlots--;
 	} else if (o->left->is<ast::Constant>()) {
 		// leftmost value is a constant, mov into edx
 		ast::Constant* c = o->left->cast<ast::Constant>();
@@ -35,6 +36,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		assembleExpression(rop2);
 		// pop the return value to edx
 		as->pop(x86::ebx);
+		usedStackSlots--;
 	}
 	// assemble rightmost value
 	if (o->right->is<ast::Block>()) {
@@ -43,6 +45,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		if (o->left->is<ast::Constant>()) {
 			// push the constant onto the stack
 			as->push(x86::ebx);
+			usedStackSlots++;
 			assembleExpression(rb);
 			/*
 				After the expression has been assembled, the top of the stack looks like this:
@@ -52,12 +55,14 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 			*/
 			as->pop(x86::ebx); // left expression
 			as->pop(x86::edx); // right expression
+			usedStackSlots -= 2;
 		} else {
 			// the result of leftmost operator is in ebx, put it on the stack
 			as->push(x86::ebx);
 			assembleExpression(rb);
 			as->pop(x86::edx); // expression result will now be in ebx
 			as->pop(x86::ebx); // leftmost operator is now in ebx
+			usedStackSlots -= 2;
 		}
 	} else if (o->right->is<ast::Constant>()) {
 		// rightmost value is a constant, mov into edx
@@ -68,6 +73,7 @@ void eval::JitEvaluator::assembleExpression(ast::Operator* o) {
 		assembleExpression(rop2);
 		// pop the return value to edx
 		as->pop(x86::edx);
+		usedStackSlots--;
 	}
     switch (o->operation) {
     	case ast::Operation::Add:
@@ -91,4 +97,5 @@ void eval::JitEvaluator::assembleExpression(ast::Block* o) {
 	ast::Operator* inner = o->list.at(0)->cast<ast::Operator>(); // Every block has one operator in it
 	assembleExpression(inner);
 	as->push(x86::ebx);
+	usedStackSlots++:
 }
