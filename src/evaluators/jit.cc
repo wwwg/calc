@@ -17,10 +17,12 @@ int (*eval::JitEvaluator::getCompiledFunction(void))(void) {
 		cout << "something terrible has happened\n";
 		return nullptr;
 	}
-	while (--usedStackSlots) {
+	cout << "used stack slots: " << usedStackSlots << endl;
+	for (int i = 0; i < usedStackSlots; ++i) {
 		// Pop all the currently used stack slots into one register
 		as->pop(x86::ecx);
 	}
+	usedStackSlots = 0;
 	// After all the assembly has been done, the result will be in ebx
 	as->mov(x86::eax, x86::ebx);
 	as->ret();
