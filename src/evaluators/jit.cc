@@ -1,6 +1,7 @@
 #include "jit.h"
 
 eval::JitEvaluator::JitEvaluator(ast::AST* _tree) {
+	usedStackSlots = 0;
     tree = _tree;
     runtime = new JitRuntime();
     code = new CodeHolder();

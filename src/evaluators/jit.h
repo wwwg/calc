@@ -26,6 +26,8 @@ namespace eval {
         void assembleExpression(ast::Operator*);
         void assembleExpression(ast::Block*);
         // void assembleExpression(ast::Expression*);
+    private:
+        int usedStackSlots;
     };
 }
 

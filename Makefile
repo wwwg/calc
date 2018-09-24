@@ -1,7 +1,7 @@
 SRC=$(wildcard src/*.cc src/**/*.cc)
 OBJS=$(SRC:.cc=.o)
 OUT=./calc
-CC=clang++
+CC=g++
 CCOPTS=-std=c++14 -c -Wall -g
 LDOPTS=-lpthread -g -lasmjit
 
