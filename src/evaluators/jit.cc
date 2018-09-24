@@ -5,8 +5,8 @@ eval::JitEvaluator::JitEvaluator(ast::AST* _tree) {
     tree = _tree;
     runtime = new JitRuntime();
     code = new CodeHolder();
-    as = new X86Assembler(code);
     code->init(runtime->getCodeInfo());
+    as = new X86Assembler(code);
 }
 void eval::JitEvaluator::generateTo(JitFunction fn) {
 	// Assemble the base of the tree
